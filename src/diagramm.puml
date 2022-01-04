@@ -1,0 +1,106 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+abstract class Well{
+    #double liquidAmount;
+    +double getLiquid(double amount)
+    Well(double liquidAmount)
+}
+
+class WaterWell extends Well{
+    +WaterWell(double liquidAmount)
+
+    +String toString()
+    +int hashCode()
+    +boolean equals()
+}
+
+class MarmeladeWell extends Well{
+    +MarmeladeWell(double liquidAmount)
+
+    +String toString()
+    +int hashCode()
+    +boolean equals()
+}
+
+abstract class AliveCreature {
+    #String name
+    AliveCreature(String name)
+}
+
+abstract class IntelligentCreature extends AliveCreature  implements Conversantionable {
+    IntelligentCreature(String name)
+
+    +void say(String st, Conversationable[] interlocutors, Emotion em)
+    +void say(String st, Conversationable[] interlocutors)
+}
+
+class MagicHat extends IntelligentCreature {
+    +MagicHat(String name)
+
+    +String toString()
+    +int hashCode()
+    +boolean equals()
+}
+
+class Human extends IntelligentCreature implements EmotionalEnfluenceable{
+    #Emotion emotion
+    +Human(String name)
+
+    +void yawn()
+    +void rubEyes()
+    +void setEmotion(Emotion em)
+
+    +String toString()
+    +int hashCode()
+    +boolean equals()
+}
+
+
+enum Emotion {
+    DAZED,
+    GLAD,
+    CURIOUS,
+    AFRAID,
+    ANXIOUS,
+    FEARFUL,
+    WORRIED,
+    AMAZED,
+    NORMAL
+
+    +{abstract}str()
+}
+
+interface HasEmotions {
+    +void setEmotion(Emotion em)
+}
+
+interface Conversantionable{
+    +void say(String st, Conversationable[] interlocutors, Emotion em)
+    +void say(String st, Conversationable[] interlocutors)
+}
+
+interface EmotionalEnfluenceable extends Conversantionable, HasEmotions{
+
+}
+
+abstract class They extends IntelligentCreature{
+    #double marmeladeAmount
+    +{abstract}live()
+    +consumeMarmelade(double amount)
+    +carryMarmelade(MarmeladeWell well, double amount)
+}
+
+
+
+
+
+HasEmotions --* Emotion
+
+
+
+hide enum empty methods
+
+@enduml

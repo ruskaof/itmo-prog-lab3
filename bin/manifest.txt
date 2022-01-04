@@ -1,0 +1,2 @@
+Main-Class: Main
+Class-Path: Main.class abstractThings/*class creatures/*class interfaces/*class things/*class
